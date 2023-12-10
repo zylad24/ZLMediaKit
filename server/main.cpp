@@ -8,6 +8,7 @@
  * may be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <dlfcn.h>
 #include <signal.h>
 #include <iostream>
 #include "Util/File.h"
@@ -271,6 +272,8 @@ int start_main(int argc,char *argv[]) {
                 return true;
             });
         }
+
+        dlopen("libext-codec.dylib", RTLD_LAZY);
 
         uint16_t shellPort = mINI::Instance()[Shell::kPort];
         uint16_t rtspPort = mINI::Instance()[Rtsp::kPort];

@@ -30,8 +30,9 @@ file(GLOB EXT_SRC_LIST
         ${CMAKE_CURRENT_SOURCE_DIR}/*.h
         ${CMAKE_CURRENT_SOURCE_DIR}/*.hpp)
 
-add_library(ext-codec STATIC ${EXT_SRC_LIST})
-add_library(ZLMediaKit::ext-codec ALIAS ext-codec)
+add_library(ext-codec SHARED ${EXT_SRC_LIST})
+# add_library(ZLMediaKit::ext-codec ALIAS ext-codec)
+target_link_options(ext-codec PRIVATE -Wl,-undefined -Wl,dynamic_lookup)
 
 target_compile_options(ext-codec PRIVATE ${COMPILE_OPTIONS_DEFAULT})
 target_compile_definitions(ext-codec PUBLIC ${COMPILE_DEFINITIONS})
@@ -45,4 +46,4 @@ target_include_directories(ext-codec
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>"
         ${INCLUDE_DIRECTORIES})
 
-update_cached_list(MK_LINK_LIBRARIES ZLMediaKit::ext-codec ${LINK_LIBRARIES})
+# update_cached_list(MK_LINK_LIBRARIES ZLMediaKit::ext-codec ${LINK_LIBRARIES})

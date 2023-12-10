@@ -33,6 +33,9 @@ project(ZLMediaKit LANGUAGES C CXX)
 # Enable C++11
 set(CMAKE_CXX_STANDARD 11)
 
+# 主程序链接符号可以给外部动态库调用
+add_link_options("LINKER:-export_dynamic")
+
 option(ENABLE_API "Enable C API SDK" ON)
 option(ENABLE_API_STATIC_LIB "Enable mk_api static lib" OFF)
 option(ENABLE_ASAN "Enable Address Sanitize" OFF)
